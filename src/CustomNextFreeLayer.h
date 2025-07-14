@@ -15,7 +15,7 @@ public:
 
 	void onClose(CCObject*) {
 		auto actualString = std::string(m_nextFreeInput->getString().c_str()) == "" ? "0" : m_nextFreeInput->getString();
-		int nextFreeValue = std::stoi(actualString);
+		int nextFreeValue = utils::numFromString<int>(actualString).unwrapOr(0);
 		nextFreeValue = nextFreeValue > 0 ? nextFreeValue : 1;
 		Mod::get()->setSavedValue("relative-next-free", nextFreeValue);
         this->removeFromParent();
